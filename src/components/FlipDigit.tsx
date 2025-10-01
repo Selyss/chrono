@@ -1,64 +1,66 @@
-import { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import "./FlipDigit.css";
 
 interface FlipDigitProps {
-  currentValue: string;
-  previousValue: string;
-  showSeam: boolean;
+  digit: string;
+  isHour: boolean;
 }
 
-const FlipDigit = ({
-  currentValue,
-  previousValue,
-  showSeam,
-}: FlipDigitProps) => {
-  const [isFlipping, setIsFlipping] = useState(false);
+const FlipDigit: React.FC<FlipDigitProps> = ({ digit, isHour }) => {
+  const flipCardRef = useRef<HTMLDivElement>(null);
+
+  const flip = useCallback((newNumber: string) => {
+    const flipCard = flipCardRef.current;
+    if (!flipCard) return;
+
+    const topHalf = flipCard.querySelector(".top") as HTMLElement;
+    const bottomHalf = flipCard.querySelector(".bottom") as HTMLElement;
+
+    if (!topHalf || !bottomHalf) return;
+
+    const startNumber = topHalf.textContent;
+    if (newNumber === startNumber) return;
+
+    const topFlip = document.createElement("div");
+    topFlip.classList.add("top-flip");
+    const bottomFlip = document.createElement("div");
+    bottomFlip.classList.add("bottom-flip");
+
+    topHalf.textContent = startNumber || "";
+    bottomHalf.textContent = startNumber || "";
+    topFlip.textContent = startNumber || "";
+    bottomFlip.textContent = newNumber;
+
+    topFlip.addEventListener("animationstart", () => {
+      topHalf.textContent = newNumber;
+    });
+
+    topFlip.addEventListener("animationend", () => {
+      topFlip.remove();
+    });
+
+    bottomFlip.addEventListener("animationend", () => {
+      bottomHalf.textContent = newNumber;
+      bottomFlip.remove();
+    });
+
+    flipCard.append(topFlip, bottomFlip);
+  }, []);
 
   useEffect(() => {
-    if (currentValue !== previousValue) {
-      setIsFlipping(true);
-
-      // Animation timing handled by CSS
-
-      // Reset flip state after animation completes
-      setTimeout(() => {
-        setIsFlipping(false);
-      }, 350);
-    }
-  }, [currentValue, previousValue]);
+    flip(digit);
+  }, [digit, flip]);
 
   return (
-    <div className="flip-digit">
-      <div className={`digit-container ${isFlipping ? "flipping" : ""}`}>
-        {/* Static back panels */}
-        <div className="digit-panel static-top">
-          <div className="digit-content">
-            <span>{currentValue}</span>
-          </div>
-        </div>
-        <div className="digit-panel static-bottom">
-          <div className="digit-content bottom">
-            <span>{currentValue}</span>
-          </div>
-        </div>
-
-        {/* Animated panels */}
-        {isFlipping && (
-          <>
-            <div className="digit-panel flip-top">
-              <div className="digit-content">
-                <span>{previousValue}</span>
-              </div>
-            </div>
-            <div className="digit-panel flip-bottom">
-              <div className="digit-content bottom">
-                <span>{currentValue}</span>
-              </div>
-            </div>
-          </>
-        )}
-
-        {showSeam && <div className="seam" />}
+    <div className="flip_container">
+      <div
+        className="flip-card"
+        ref={flipCardRef}
+        data-hour-tens={isHour ? "true" : undefined}
+        data-minute-tens={!isHour ? "true" : undefined}
+      >
+        <div className="top">{digit}</div>
+        <div className="bottom">{digit}</div>
       </div>
     </div>
   );

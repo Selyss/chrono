@@ -1,234 +1,79 @@
-.flip-digit {
-  perspective: 1200px;
-  position: relative;
+* {
+  box-sizing: border-box;
 }
 
-.digit-container {
-  position: relative;
-  width: clamp(180px, 35vw, 450px);
-  height: clamp(270px, 52.5vw, 675px);
-  transform-style: preserve-3d;
+.flip_container {
+  color: var(--text);
 }
 
-.digit-panel {
-  position: absolute;
+.flip-card {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  border-radius: 0.1em;
+  font-size: var(--font-size);
   width: 100%;
-  height: 50%;
-  background: #1f1f1f;
-  border: none;
+  top: -2vmin;
+  text-shadow: 0px 3px 5px black;
+  user-select: none;
+}
+
+[data-theme="light"] .flip-card {
+  text-shadow: unset;
+}
+
+.top,
+.bottom,
+.flip-card .top-flip,
+.flip-card .bottom-flip {
+  height: 0.1em;
+  line-height: 0.5;
+  padding: 0.25em 0 0.25em 0;
   overflow: hidden;
-  backface-visibility: hidden;
-  border-radius: clamp(12px, 3vw, 30px);
-  box-shadow: 0 0 0 3px #2d2d2d, 0 12px 36px rgba(0, 0, 0, 0.7),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-}
-
-.digit-panel.static-top,
-.digit-panel.flip-top {
-  top: 0;
-  transform-origin: bottom;
-  border-radius: clamp(12px, 3vw, 30px) clamp(12px, 3vw, 30px) 0 0;
-}
-
-.digit-panel.static-bottom,
-.digit-panel.flip-bottom {
-  bottom: 0;
-  transform-origin: top;
-  border-radius: 0 0 clamp(12px, 3vw, 30px) clamp(12px, 3vw, 30px);
-}
-
-.digit-content {
-  display: flex;
+  text-align: center;
   justify-content: center;
-  align-items: center;
+}
+
+.top,
+.flip-card .top-flip {
+  background-color: var(--holder);
+  border-top-right-radius: 0.1em;
+  border-top-left-radius: 0.1em;
+}
+
+.bottom,
+.flip-card .bottom-flip {
+  background-color: var(--holder);
+  display: flex;
+  align-items: flex-end;
+  border-bottom-right-radius: 0.1em;
+  border-bottom-left-radius: 0.1em;
+}
+
+.flip-card .top-flip {
+  position: absolute;
   width: 100%;
-  height: 200%;
-  position: relative;
-  top: 0;
+  animation: flip-top 250ms ease-in;
+  transform-origin: bottom;
 }
 
-.digit-content.bottom {
-  top: -100%;
-}
-
-.digit-content span {
-  color: #ffffff;
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  font-weight: 900;
-  font-size: clamp(160px, 32vw, 400px);
-  line-height: 0.6;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 255, 255, 0.1);
-  letter-spacing: -0.08em;
-}
-
-/* Animation states */
-.flipping .static-top {
-  z-index: 2;
-}
-
-.flipping .static-bottom {
-  z-index: 2;
-}
-
-.flip-top {
-  z-index: 4;
-  animation: flipTop 0.35s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-}
-
-.flip-bottom {
-  z-index: 3;
-  transform: rotateX(-90deg);
-  animation: flipBottom 0.35s cubic-bezier(0.25, 0.1, 0.25, 1) 0.175s forwards;
-}
-
-@keyframes flipTop {
-  0% {
-    transform: rotateX(0deg);
-    box-shadow: 0 0 0 2px #333, 0 8px 24px rgba(0, 0, 0, 0.6),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.1),
-      inset 0 0 20px rgba(0, 0, 0, 0.4);
-  }
+@keyframes flip-top {
   100% {
-    transform: rotateX(-90deg);
-    box-shadow: 0 0 0 2px #333, 0 16px 32px rgba(0, 0, 0, 0.8),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-      inset 0 0 30px rgba(0, 0, 0, 0.6);
+    transform: rotateX(90deg);
   }
 }
 
-@keyframes flipBottom {
-  0% {
-    transform: rotateX(-90deg);
-    box-shadow: 0 0 0 2px #333, 0 16px 32px rgba(0, 0, 0, 0.8),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-      inset 0 0 30px rgba(0, 0, 0, 0.6);
-  }
-  100% {
-    transform: rotateX(0deg);
-    box-shadow: 0 0 0 2px #333, 0 8px 24px rgba(0, 0, 0, 0.6),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.1),
-      inset 0 0 20px rgba(0, 0, 0, 0.4);
-  }
-}
-
-/* Seam (hinge line) */
-.seam {
+.flip-card .bottom-flip {
   position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(
-    180deg,
-    #0a0a0a 0%,
-    #1a1a1a 25%,
-    #2a2a2a 50%,
-    #1a1a1a 75%,
-    #0a0a0a 100%
-  );
-  z-index: 15;
-  transform: translateY(-1.5px);
-  box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.9), 0 3px 6px rgba(0, 0, 0, 0.9),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.8);
-}
-
-/* Simple depth effect without gradients */
-.digit-panel::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.03);
-  pointer-events: none;
-  border-radius: inherit;
+  width: 100%;
+  animation: flip-bottom 250ms ease-out 250ms;
+  transform-origin: top;
+  transform: rotateX(90deg);
 }
 
-/* Responsive adjustments - maintaining large sizes */
-@media (max-width: 1200px) {
-  .digit-container {
-    width: clamp(160px, 32vw, 350px);
-    height: clamp(240px, 48vw, 525px);
-  }
-
-  .digit-content span {
-    font-size: clamp(140px, 28vw, 320px);
-  }
-}
-
-@media (max-width: 768px) {
-  .digit-container {
-    width: clamp(140px, 38vw, 280px);
-    height: clamp(210px, 57vw, 420px);
-  }
-
-  .digit-content span {
-    font-size: clamp(120px, 34vw, 260px);
-  }
-
-  .digit-panel {
-    border-radius: clamp(8px, 2.5vw, 18px);
-  }
-
-  .digit-panel.static-top,
-  .digit-panel.flip-top {
-    border-radius: clamp(8px, 2.5vw, 18px) clamp(8px, 2.5vw, 18px) 0 0;
-  }
-
-  .digit-panel.static-bottom,
-  .digit-panel.flip-bottom {
-    border-radius: 0 0 clamp(8px, 2.5vw, 18px) clamp(8px, 2.5vw, 18px);
-  }
-}
-
-@media (max-width: 480px) {
-  .digit-container {
-    width: clamp(120px, 42vw, 220px);
-    height: clamp(180px, 63vw, 330px);
-  }
-
-  .digit-content span {
-    font-size: clamp(100px, 38vw, 200px);
-  }
-
-  .digit-panel {
-    border-radius: clamp(6px, 3vw, 15px);
-  }
-
-  .digit-panel.static-top,
-  .digit-panel.flip-top {
-    border-radius: clamp(6px, 3vw, 15px) clamp(6px, 3vw, 15px) 0 0;
-  }
-
-  .digit-panel.static-bottom,
-  .digit-panel.flip-bottom {
-    border-radius: 0 0 clamp(6px, 3vw, 15px) clamp(6px, 3vw, 15px);
-  }
-}
-
-/* Landscape orientation adjustments */
-@media (orientation: landscape) and (max-height: 600px) {
-  .digit-container {
-    width: clamp(90px, 20vh, 140px);
-    height: clamp(135px, 30vh, 210px);
-  }
-
-  .digit-content span {
-    font-size: clamp(65px, 18vh, 120px);
-  }
-
-  .digit-panel {
-    border-radius: clamp(6px, 2.5vh, 12px);
-  }
-
-  .digit-panel.static-top,
-  .digit-panel.flip-top {
-    border-radius: clamp(6px, 2.5vh, 12px) clamp(6px, 2.5vh, 12px) 0 0;
-  }
-
-  .digit-panel.static-bottom,
-  .digit-panel.flip-bottom {
-    border-radius: 0 0 clamp(6px, 2.5vh, 12px) clamp(6px, 2.5vh, 12px);
+@keyframes flip-bottom {
+  100% {
+    transform: rotateX(0deg);
   }
 }
