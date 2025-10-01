@@ -99,12 +99,12 @@ body {
 
 .holder h2 {
   position: absolute;
-  top: 70%;
+  top: 15%;
+  left: 7%;
   color: var(--text);
   font-size: clamp(3vw, 4vw, 5vw);
   font-family: Arial;
   font-weight: bold;
-  margin-left: 7%;
   text-align: left;
 }
 

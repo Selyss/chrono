@@ -31,7 +31,7 @@ const FlipClock: React.FC = () => {
     else if (hours > 12) hours -= 12;
 
     return {
-      hours: hours.toString().padStart(2, "0"),
+      hours: hours.toString(),
       minutes: minutes.toString().padStart(2, "0"),
     };
   };
