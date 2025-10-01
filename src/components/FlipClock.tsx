@@ -111,8 +111,6 @@ const FlipClock = () => {
             showSeam={settings.showSeam}
           />
 
-          <div className="separator">:</div>
-
           <FlipDigit
             currentValue={currentTime.minutes[0]}
             previousValue={previousTime.minutes[0]}
@@ -126,7 +124,6 @@ const FlipClock = () => {
 
           {settings.showSeconds && (
             <>
-              <div className="separator">:</div>
               <FlipDigit
                 currentValue={currentTime.seconds[0]}
                 previousValue={previousTime.seconds[0]}
