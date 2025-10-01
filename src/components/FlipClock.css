@@ -129,39 +129,52 @@ body {
 /* Mobile Portrait */
 @media only screen and (max-width: 768px) and (orientation: portrait) {
   .line {
-    height: 3px;
+    height: 4px;
+    background-color: var(--background);
   }
 
   .container {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2vmin;
-    padding: 0;
+    gap: 4vmin;
+    padding: 5vh 5vw;
+    height: 100vh;
   }
 
   .holder {
-    width: 80vmin;
-    height: 40vmin;
+    width: 85vw;
+    height: 25vh;
     margin: 0;
-    padding: 1vmin;
-    border-radius: 5vmin;
+    padding: 2vmin;
+    border-radius: 8vmin;
+    min-height: 120px;
   }
 
   .holder h1 {
-    font-size: clamp(25vw, 30vw, 35vw);
+    font-size: clamp(20vw, 25vw, 30vw);
+    font-weight: 300;
+    line-height: 0.8;
   }
 
   .holder h2 {
-    top: 10%;
-    left: 10%;
-    font-size: clamp(4vw, 5vw, 6vw);
+    top: 8%;
+    left: 8%;
+    font-size: clamp(5vw, 6vw, 7vw);
+    font-weight: bold;
   }
 
   .fullscreen-hint {
-    font-size: 12px;
-    top: 15px;
-    right: 15px;
+    font-size: 11px;
+    top: 20px;
+    right: 20px;
+    opacity: 0.8;
+  }
+
+  /* Adjust AM/PM position for portrait */
+  .holder:first-child h2 {
+    top: 5%;
+    left: 5%;
   }
 }
 
