@@ -19,36 +19,60 @@
 
 .ampm-indicator {
   position: absolute;
-  top: -40px;
+  top: -60px;
   left: 0;
   color: #fff;
   font-family: "Helvetica Neue", "Arial", sans-serif;
-  font-weight: 600;
-  font-size: min(3vw, 2rem);
+  font-weight: 300;
+  font-size: min(2.5vw, 1.5rem);
   font-variant: small-caps;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
+  opacity: 0.8;
 }
 
 .digits-container {
   display: flex;
   align-items: center;
-  gap: min(2vw, 1rem);
+  gap: min(1.5vw, 1.2rem);
 }
 
 .separator {
   color: #fff;
   font-family: "Helvetica Neue", "Arial", sans-serif;
-  font-weight: bold;
-  font-size: min(15vw, 12rem);
-  line-height: 0.8;
-  margin: 0 min(1vw, 0.5rem);
+  font-weight: 300;
+  font-size: min(12vw, 10rem);
+  line-height: 0.7;
+  margin: 0 min(0.8vw, 0.6rem);
+  opacity: 0.9;
 }
 
-/* Responsive scaling */
+/* Responsive scaling - Desktop First */
+@media (max-width: 1200px) {
+  .separator {
+    font-size: min(14vw, 8rem);
+  }
+}
+
 @media (max-width: 768px) {
   .ampm-indicator {
+    font-size: 3vw;
+    top: -8vw;
+  }
+
+  .separator {
+    font-size: 16vw;
+    margin: 0 1.5vw;
+  }
+
+  .digits-container {
+    gap: 2vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .ampm-indicator {
     font-size: 4vw;
-    top: -6vw;
+    top: -10vw;
   }
 
   .separator {
@@ -57,39 +81,23 @@
   }
 
   .digits-container {
-    gap: 3vw;
-  }
-}
-
-@media (max-width: 480px) {
-  .ampm-indicator {
-    font-size: 5vw;
-    top: -8vw;
-  }
-
-  .separator {
-    font-size: 25vw;
-    margin: 0 2.5vw;
-  }
-
-  .digits-container {
-    gap: 3.5vw;
+    gap: 2.5vw;
   }
 }
 
 /* Landscape orientation adjustments */
 @media (orientation: landscape) and (max-height: 600px) {
   .ampm-indicator {
-    font-size: min(4vh, 2rem);
-    top: min(-6vh, -30px);
+    font-size: min(3vh, 1.2rem);
+    top: min(-8vh, -40px);
   }
 
   .separator {
-    font-size: min(20vh, 8rem);
-    margin: 0 min(2vh, 1rem);
+    font-size: min(16vh, 6rem);
+    margin: 0 min(1.5vh, 0.8rem);
   }
 
   .digits-container {
-    gap: min(3vh, 1.5rem);
+    gap: min(2vh, 1rem);
   }
 }
