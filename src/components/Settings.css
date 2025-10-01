@@ -1,0 +1,195 @@
+.settings-toggle {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.settings-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.settings-panel {
+  position: absolute;
+  top: 2rem;
+  right: 6rem;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  padding: 0;
+  min-width: 250px;
+  backdrop-filter: blur(20px);
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.settings-content {
+  padding: 1.5rem;
+}
+
+.settings-content h3 {
+  color: #fff;
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+.setting-item {
+  margin-bottom: 1.2rem;
+}
+
+.setting-item:last-child {
+  margin-bottom: 0;
+}
+
+.setting-item label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #fff;
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.setting-item input[type="checkbox"] {
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.2rem;
+  background: transparent;
+  margin-right: 0.75rem;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.setting-item input[type="checkbox"]:checked {
+  background: #fff;
+  border-color: #fff;
+}
+
+.setting-item input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  top: -2px;
+  left: 1px;
+  color: #000;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.setting-item input[type="range"] {
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  outline: none;
+  margin-top: 0.5rem;
+}
+
+.setting-item input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.setting-item input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.setting-item input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.1s ease;
+}
+
+.setting-item input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+.setting-item label:has(input[type="checkbox"]) {
+  flex-direction: row;
+  align-items: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .settings-toggle {
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+
+  .settings-panel {
+    top: 1rem;
+    right: 4.5rem;
+    min-width: 200px;
+  }
+
+  .settings-content {
+    padding: 1rem;
+  }
+
+  .settings-content h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .setting-item {
+    margin-bottom: 1rem;
+  }
+
+  .setting-item label {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    right: auto;
+    width: 90vw;
+    max-width: 300px;
+  }
+}

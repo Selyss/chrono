@@ -1,0 +1,95 @@
+.flip-clock {
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.time-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ampm-indicator {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  color: #fff;
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+  font-weight: 600;
+  font-size: min(3vw, 2rem);
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+}
+
+.digits-container {
+  display: flex;
+  align-items: center;
+  gap: min(2vw, 1rem);
+}
+
+.separator {
+  color: #fff;
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+  font-weight: bold;
+  font-size: min(15vw, 12rem);
+  line-height: 0.8;
+  margin: 0 min(1vw, 0.5rem);
+}
+
+/* Responsive scaling */
+@media (max-width: 768px) {
+  .ampm-indicator {
+    font-size: 4vw;
+    top: -6vw;
+  }
+
+  .separator {
+    font-size: 20vw;
+    margin: 0 2vw;
+  }
+
+  .digits-container {
+    gap: 3vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .ampm-indicator {
+    font-size: 5vw;
+    top: -8vw;
+  }
+
+  .separator {
+    font-size: 25vw;
+    margin: 0 2.5vw;
+  }
+
+  .digits-container {
+    gap: 3.5vw;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 600px) {
+  .ampm-indicator {
+    font-size: min(4vh, 2rem);
+    top: min(-6vh, -30px);
+  }
+
+  .separator {
+    font-size: min(20vh, 8rem);
+    margin: 0 min(2vh, 1rem);
+  }
+
+  .digits-container {
+    gap: min(3vh, 1.5rem);
+  }
+}

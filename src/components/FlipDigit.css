@@ -1,0 +1,198 @@
+.flip-digit {
+  perspective: 1000px;
+  position: relative;
+}
+
+.digit-container {
+  position: relative;
+  width: min(12vw, 8rem);
+  height: min(18vw, 12rem);
+  transform-style: preserve-3d;
+}
+
+.digit-panel {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background: #222;
+  border: 1px solid #333;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+.digit-panel.static-top,
+.digit-panel.flip-top {
+  top: 0;
+  transform-origin: bottom;
+  border-radius: min(1vw, 0.5rem) min(1vw, 0.5rem) 0 0;
+}
+
+.digit-panel.static-bottom,
+.digit-panel.flip-bottom {
+  bottom: 0;
+  transform-origin: top;
+  border-radius: 0 0 min(1vw, 0.5rem) min(1vw, 0.5rem);
+}
+
+.digit-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200%;
+  position: relative;
+  top: 0;
+}
+
+.digit-content.bottom {
+  top: -100%;
+}
+
+.digit-content span {
+  color: #fff;
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+  font-weight: bold;
+  font-size: min(12vw, 8rem);
+  line-height: 1;
+  text-shadow: 0 0 min(2vw, 1rem) rgba(255, 255, 255, 0.1);
+}
+
+/* Animation states */
+.flipping .static-top {
+  z-index: 1;
+}
+
+.flipping .static-bottom {
+  z-index: 1;
+}
+
+.flip-top {
+  z-index: 3;
+  animation: flipTop 0.35s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.flip-bottom {
+  z-index: 2;
+  transform: rotateX(-90deg);
+  animation: flipBottom 0.35s cubic-bezier(0.25, 0.1, 0.25, 1) 0.175s forwards;
+}
+
+@keyframes flipTop {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(-90deg);
+  }
+}
+
+@keyframes flipBottom {
+  0% {
+    transform: rotateX(-90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+/* Seam (hinge line) */
+.seam {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #555;
+  z-index: 10;
+  transform: translateY(-0.5px);
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Realistic shadows for depth */
+.digit-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  pointer-events: none;
+}
+
+.digit-panel.static-bottom::before,
+.digit-panel.flip-bottom::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .digit-container {
+    width: 15vw;
+    height: 22.5vw;
+  }
+
+  .digit-content span {
+    font-size: 15vw;
+  }
+
+  .digit-panel {
+    border-radius: 1.5vw 1.5vw 0 0;
+  }
+
+  .digit-panel.static-bottom,
+  .digit-panel.flip-bottom {
+    border-radius: 0 0 1.5vw 1.5vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .digit-container {
+    width: 18vw;
+    height: 27vw;
+  }
+
+  .digit-content span {
+    font-size: 18vw;
+  }
+
+  .digit-panel {
+    border-radius: 2vw 2vw 0 0;
+  }
+
+  .digit-panel.static-bottom,
+  .digit-panel.flip-bottom {
+    border-radius: 0 0 2vw 2vw;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 600px) {
+  .digit-container {
+    width: min(15vh, 6rem);
+    height: min(22.5vh, 9rem);
+  }
+
+  .digit-content span {
+    font-size: min(15vh, 6rem);
+  }
+
+  .digit-panel {
+    border-radius: min(2vh, 0.75rem) min(2vh, 0.75rem) 0 0;
+  }
+
+  .digit-panel.static-bottom,
+  .digit-panel.flip-bottom {
+    border-radius: 0 0 min(2vh, 0.75rem) min(2vh, 0.75rem);
+  }
+}
