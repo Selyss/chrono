@@ -58,7 +58,7 @@ body {
 .line {
   width: 100vw;
   height: 8px;
-  background-color: var(--holder);
+  background-color: var(--background);
   position: absolute;
   top: 50%;
   left: 0;
