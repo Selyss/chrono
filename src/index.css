@@ -1,4 +1,4 @@
-@import "./fonts.css";
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=block');
 
 * {
   margin: 0;
