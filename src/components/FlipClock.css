@@ -2,9 +2,9 @@
 
 :root {
   --background: black;
-  --line: black;
+  --line: #000000;
   --text: #c6c6c6;
-  --holder: #272727;
+  --holder: #0f0f0f;
   --theme_container_border: rgba(146, 146, 146, 0.481);
   --theme-secondary: white;
   --theme_shadow: black;
