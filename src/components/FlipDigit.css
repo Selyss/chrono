@@ -5,8 +5,8 @@
 
 .digit-container {
   position: relative;
-  width: clamp(120px, 20vw, 200px);
-  height: clamp(180px, 30vw, 300px);
+  width: clamp(180px, 35vw, 450px);
+  height: clamp(270px, 52.5vw, 675px);
   transform-style: preserve-3d;
 }
 
@@ -14,27 +14,27 @@
   position: absolute;
   width: 100%;
   height: 50%;
-  background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+  background: #1f1f1f;
   border: none;
   overflow: hidden;
   backface-visibility: hidden;
-  border-radius: clamp(8px, 2vw, 20px);
-  box-shadow: 0 0 0 2px #333, 0 8px 24px rgba(0, 0, 0, 0.6),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 0 20px rgba(0, 0, 0, 0.4);
+  border-radius: clamp(12px, 3vw, 30px);
+  box-shadow: 0 0 0 3px #2d2d2d, 0 12px 36px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .digit-panel.static-top,
 .digit-panel.flip-top {
   top: 0;
   transform-origin: bottom;
-  border-radius: clamp(8px, 2vw, 20px) clamp(8px, 2vw, 20px) 0 0;
+  border-radius: clamp(12px, 3vw, 30px) clamp(12px, 3vw, 30px) 0 0;
 }
 
 .digit-panel.static-bottom,
 .digit-panel.flip-bottom {
   bottom: 0;
   transform-origin: top;
-  border-radius: 0 0 clamp(8px, 2vw, 20px) clamp(8px, 2vw, 20px);
+  border-radius: 0 0 clamp(12px, 3vw, 30px) clamp(12px, 3vw, 30px);
 }
 
 .digit-content {
@@ -54,11 +54,11 @@
 .digit-content span {
   color: #ffffff;
   font-family: "Helvetica Neue", Arial, sans-serif;
-  font-weight: 800;
-  font-size: clamp(80px, 18vw, 180px);
-  line-height: 0.7;
-  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 255, 255, 0.1);
-  letter-spacing: -0.05em;
+  font-weight: 900;
+  font-size: clamp(160px, 32vw, 400px);
+  line-height: 0.6;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 255, 255, 0.1);
+  letter-spacing: -0.08em;
 }
 
 /* Animation states */
@@ -132,95 +132,78 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.8);
 }
 
-/* Enhanced depth and realism */
-.digit-panel::before {
+/* Simple depth effect without gradients */
+.digit-panel::after {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(255, 255, 255, 0.05) 30%,
-    rgba(0, 0, 0, 0.1) 70%,
-    rgba(0, 0, 0, 0.2) 100%
-  );
+  background: rgba(255, 255, 255, 0.03);
   pointer-events: none;
   border-radius: inherit;
 }
 
-.digit-panel.static-bottom::before,
-.digit-panel.flip-bottom::before {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.2) 0%,
-    rgba(0, 0, 0, 0.1) 30%,
-    rgba(255, 255, 255, 0.05) 70%,
-    rgba(255, 255, 255, 0.15) 100%
-  );
-}
-
-/* Responsive adjustments */
+/* Responsive adjustments - maintaining large sizes */
 @media (max-width: 1200px) {
   .digit-container {
-    width: clamp(100px, 18vw, 160px);
-    height: clamp(150px, 27vw, 240px);
+    width: clamp(160px, 32vw, 350px);
+    height: clamp(240px, 48vw, 525px);
   }
 
   .digit-content span {
-    font-size: clamp(70px, 16vw, 140px);
+    font-size: clamp(140px, 28vw, 320px);
   }
 }
 
 @media (max-width: 768px) {
   .digit-container {
-    width: clamp(80px, 22vw, 140px);
-    height: clamp(120px, 33vw, 210px);
+    width: clamp(140px, 38vw, 280px);
+    height: clamp(210px, 57vw, 420px);
   }
 
   .digit-content span {
-    font-size: clamp(60px, 20vw, 120px);
+    font-size: clamp(120px, 34vw, 260px);
   }
 
   .digit-panel {
-    border-radius: clamp(6px, 2.5vw, 15px);
+    border-radius: clamp(8px, 2.5vw, 18px);
   }
 
   .digit-panel.static-top,
   .digit-panel.flip-top {
-    border-radius: clamp(6px, 2.5vw, 15px) clamp(6px, 2.5vw, 15px) 0 0;
+    border-radius: clamp(8px, 2.5vw, 18px) clamp(8px, 2.5vw, 18px) 0 0;
   }
 
   .digit-panel.static-bottom,
   .digit-panel.flip-bottom {
-    border-radius: 0 0 clamp(6px, 2.5vw, 15px) clamp(6px, 2.5vw, 15px);
+    border-radius: 0 0 clamp(8px, 2.5vw, 18px) clamp(8px, 2.5vw, 18px);
   }
 }
 
 @media (max-width: 480px) {
   .digit-container {
-    width: clamp(70px, 25vw, 120px);
-    height: clamp(105px, 37.5vw, 180px);
+    width: clamp(120px, 42vw, 220px);
+    height: clamp(180px, 63vw, 330px);
   }
 
   .digit-content span {
-    font-size: clamp(50px, 23vw, 100px);
+    font-size: clamp(100px, 38vw, 200px);
   }
 
   .digit-panel {
-    border-radius: clamp(5px, 3vw, 12px);
+    border-radius: clamp(6px, 3vw, 15px);
   }
 
   .digit-panel.static-top,
   .digit-panel.flip-top {
-    border-radius: clamp(5px, 3vw, 12px) clamp(5px, 3vw, 12px) 0 0;
+    border-radius: clamp(6px, 3vw, 15px) clamp(6px, 3vw, 15px) 0 0;
   }
 
   .digit-panel.static-bottom,
   .digit-panel.flip-bottom {
-    border-radius: 0 0 clamp(5px, 3vw, 12px) clamp(5px, 3vw, 12px);
+    border-radius: 0 0 clamp(6px, 3vw, 15px) clamp(6px, 3vw, 15px);
   }
 }
 
