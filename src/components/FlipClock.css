@@ -100,7 +100,7 @@ body {
 
 .holder h2 {
   position: absolute;
-  top: 15%;
+  top: 5%;
   left: 7%;
   color: var(--text);
   font-size: clamp(3vw, 4vw, 5vw);
