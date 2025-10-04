@@ -77,3 +77,29 @@
     transform: rotateX(0deg);
   }
 }
+
+/* Mobile portrait adjustments: give more separation between halves */
+@media (max-width: 768px) and (orientation: portrait) {
+  .flip-card {
+    top: 0;                 /* remove negative shift */
+    font-size: 55vmin;      /* smaller so halves fit nicely */
+    text-shadow: none;      /* cleaner edges on mobile */
+  }
+  .flip-card .top,
+  .flip-card .bottom,
+  .flip-card .top-flip,
+  .flip-card .bottom-flip {
+    height: 0.48em;         /* real half height instead of thin slice */
+    padding: 0;             /* remove extra vertical padding */
+    line-height: 0.95;      /* normal glyph height */
+  }
+  .flip-card .top,
+  .flip-card .top-flip { /* space under top half */
+    margin-bottom: 0.06em;
+  }
+  .flip-card .bottom,
+  .flip-card .bottom-flip { /* space above bottom half */
+    margin-top: 0.06em;
+    align-items: center;
+  }
+}
