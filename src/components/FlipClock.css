@@ -128,53 +128,44 @@ body {
 
 /* Mobile Portrait */
 @media only screen and (max-width: 768px) and (orientation: portrait) {
-  .line {
-    height: 4px;
-    background-color: var(--background);
+  /* Use dynamic viewport height to avoid iOS toolbar jump */
+  .flip-clock {
+    min-height: 100dvh;
+    --font-size: 55vmin; /* smaller so digits fit refined aspect */
   }
+  /* Hide global mid-screen line; not appropriate when stacked */
+  .line { display: none; }
 
   .container {
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 4vmin;
-    padding: 5vh 5vw;
-    height: 100vh;
+    padding: calc(env(safe-area-inset-top, 0) + 2vh) 4vw 4vh 4vw;
+    height: 100%;
   }
-
   .holder {
-    width: 85vw;
-    height: 25vh;
+    width: 90vw;
+    height: 42vh; /* two panels fill vertical space comfortably */
+    max-height: 48vh;
     margin: 0;
-    padding: 2vmin;
-    border-radius: 8vmin;
-    min-height: 120px;
+    padding: 2vmin 2vmin 1vmin 2vmin;
+    border-radius: 6vmin;
+    box-sizing: border-box;
   }
+  /* Hours (first) on top, minutes second */
+  .holder:first-child { order: 1; }
+  .holder:last-child { order: 2; }
 
   .holder h1 {
-    font-size: clamp(20vw, 25vw, 30vw);
-    font-weight: 300;
-    line-height: 0.8;
+    font-size: clamp(26vw, 32vw, 36vw);
+    line-height: 0.85;
   }
-
   .holder h2 {
-    top: 8%;
-    left: 8%;
-    font-size: clamp(5vw, 6vw, 7vw);
-    font-weight: bold;
-  }
-
-  .fullscreen-hint {
-    font-size: 11px;
-    top: 20px;
-    right: 20px;
-    opacity: 0.8;
-  }
-
-  /* Adjust AM/PM position for portrait */
-  .holder:first-child h2 {
-    top: 5%;
-    left: 5%;
+    top: 6%;
+    left: 6%;
+    font-size: clamp(6vw, 6.5vw, 7vw);
+    letter-spacing: 0.05em;
   }
 }
 
